@@ -1,0 +1,965 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIOS, UEFI and Windows Installation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            color: #222;
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #123c69;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        nav {
+            background: #205493;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            margin: 6px 10px;
+        }
+
+        nav a:hover {
+            color: #ffd166;
+        }
+
+        main {
+            max-width: 950px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 22px;
+            padding: 22px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px #ccc;
+        }
+
+        h2 {
+            color: #123c69;
+            border-bottom: 2px solid #205493;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #205493;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #dbeafe;
+        }
+
+        footer {
+            background: #123c69;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>BIOS, UEFI and Windows Installation</h1>
+    <p>Computer Systems Servicing Notes</p>
+</header>
+
+<nav>
+    <a href="#bios">BIOS</a>
+    <a href="#uefi">UEFI</a>
+    <a href="#comparison">Comparison</a>
+    <a href="#settings">Settings</a>
+    <a href="#keys">Setup Keys</a>
+    <a href="#boot">Boot Order</a>
+    <a href="#windows">Windows Installation</a>
+    <a href="#problems">Troubleshooting</a>
+</nav>
+
+<main>
+
+<!-- 1. BIOS -->
+
+<section id="bios">
+    <h2>1. What is BIOS?</h2>
+
+    <p>
+        BIOS stands for Basic Input/Output System.
+        It is firmware stored on the motherboard that
+        initializes computer hardware and prepares the
+        computer to start an operating system.
+    </p>
+
+    <h3>Functions of BIOS</h3>
+    <ol>
+        <li>Performs the Power-On Self-Test (POST).</li>
+        <li>Detects installed hardware devices.</li>
+        <li>Initializes system components.</li>
+        <li>Determines the boot device.</li>
+        <li>Starts the process of loading the operating system.</li>
+    </ol>
+</section>
+
+<!-- 2. UEFI -->
+
+<section id="uefi">
+    <h2>2. What is UEFI?</h2>
+
+    <p>
+        UEFI stands for Unified Extensible Firmware Interface.
+        It is a modern firmware interface that initializes
+        computer hardware and helps start the operating system.
+        It replaces traditional BIOS firmware on most modern
+        computers.
+    </p>
+
+    <h3>Features of UEFI</h3>
+    <ul>
+        <li>May provide a graphical interface and mouse support.</li>
+        <li>Supports the GPT partition scheme.</li>
+        <li>Supports modern storage devices and large drives.</li>
+        <li>Supports Secure Boot on compatible systems.</li>
+        <li>Offers flexible boot configuration options.</li>
+        <li>Can improve boot performance on supported systems.</li>
+    </ul>
+</section>
+
+<!-- 3. BIOS VS UEFI -->
+
+<section id="comparison">
+    <h2>3. BIOS vs. UEFI</h2>
+
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>Legacy BIOS</th>
+            <th>UEFI</th>
+        </tr>
+        <tr>
+            <td>Interface</td>
+            <td>Usually text-based</td>
+            <td>Text-based or graphical</td>
+        </tr>
+        <tr>
+            <td>Partition Scheme</td>
+            <td>Commonly MBR</td>
+            <td>Commonly GPT</td>
+        </tr>
+        <tr>
+            <td>Storage Support</td>
+            <td>Traditional boot limitations</td>
+            <td>Supports large GPT boot drives</td>
+        </tr>
+        <tr>
+            <td>Security</td>
+            <td>Limited built-in boot security</td>
+            <td>Can support Secure Boot</td>
+        </tr>
+        <tr>
+            <td>Mouse Support</td>
+            <td>Usually keyboard only</td>
+            <td>May support a mouse</td>
+        </tr>
+        <tr>
+            <td>Hardware Compatibility</td>
+            <td>Useful for older systems</td>
+            <td>Designed for modern systems</td>
+        </tr>
+    </table>
+
+    <h3>Why Choose UEFI?</h3>
+    <ul>
+        <li>Supports GPT and large boot drives.</li>
+        <li>Provides Secure Boot on compatible systems.</li>
+        <li>Offers modern hardware support.</li>
+        <li>Provides flexible boot configuration.</li>
+    </ul>
+
+    <h3>Why Use Legacy BIOS?</h3>
+    <ul>
+        <li>Supports some older operating systems.</li>
+        <li>May be required for older hardware.</li>
+        <li>Helps maintain compatibility with legacy systems.</li>
+    </ul>
+</section>
+
+<!-- 4. BIOS SETTINGS -->
+
+<section id="settings">
+    <h2>4. Important BIOS/UEFI Settings</h2>
+
+    <ol>
+        <li>
+            <b>Boot Order:</b>
+            Determines which device the computer tries to start from first.
+        </li>
+        <li>
+            <b>Boot Mode:</b>
+            Selects UEFI or Legacy BIOS mode when supported.
+        </li>
+        <li>
+            <b>BIOS/UEFI Password:</b>
+            Helps restrict unauthorized access to firmware settings.
+        </li>
+        <li>
+            <b>Date and Time:</b>
+            Sets the system clock.
+        </li>
+        <li>
+            <b>Storage Settings:</b>
+            Configures supported storage devices and controller modes.
+        </li>
+        <li>
+            <b>CPU Settings:</b>
+            Displays or configures supported processor options.
+        </li>
+        <li>
+            <b>Memory Settings:</b>
+            Displays or configures supported RAM options.
+        </li>
+        <li>
+            <b>Secure Boot:</b>
+            Helps prevent unauthorized boot software from loading.
+        </li>
+        <li>
+            <b>Virtualization:</b>
+            Enables processor features used by virtual machines.
+        </li>
+        <li>
+            <b>Save and Exit:</b>
+            Saves configuration changes and restarts the computer.
+        </li>
+    </ol>
+</section>
+
+<!-- 5. ACCESSING BIOS -->
+
+<section id="keys">
+    <h2>5. Safety Precautions and Setup Keys</h2>
+
+    <h3>Safety Precautions</h3>
+    <ul>
+        <li>Shut down or restart the computer properly.</li>
+        <li>Use the correct key to enter BIOS/UEFI setup.</li>
+        <li>Identify settings before changing them.</li>
+        <li>Record original settings before making changes.</li>
+        <li>Avoid changing unfamiliar options.</li>
+        <li>Save only necessary changes.</li>
+        <li>Exit without saving if you are unsure.</li>
+    </ul>
+
+    <h3>Common BIOS/UEFI Setup Keys</h3>
+
+    <table>
+        <tr>
+            <th>Manufacturer</th>
+            <th>Common Setup Key</th>
+        </tr>
+        <tr>
+            <td>ASUS</td>
+            <td>F2 or Delete</td>
+        </tr>
+        <tr>
+            <td>Acer</td>
+            <td>F2 or Delete</td>
+        </tr>
+        <tr>
+            <td>Dell</td>
+            <td>F2</td>
+        </tr>
+        <tr>
+            <td>HP</td>
+            <td>F10 or Esc</td>
+        </tr>
+        <tr>
+            <td>Lenovo</td>
+            <td>F1 or F2</td>
+        </tr>
+        <tr>
+            <td>MSI</td>
+            <td>Delete</td>
+        </tr>
+    </table>
+
+    <p>
+        Note: Setup keys vary depending on the computer model.
+        Check the manufacturer's instructions when necessary.
+    </p>
+</section>
+
+<!-- 6. BOOT ORDER -->
+
+<section id="boot">
+    <h2>6. Boot Order and Boot Devices</h2>
+
+    <p>
+        Boot order determines which device the computer checks
+        first when starting.
+    </p>
+
+    <h3>Examples of Boot Devices</h3>
+    <ul>
+        <li>USB flash drive</li>
+        <li>SSD (Solid-State Drive)</li>
+        <li>HDD (Hard Disk Drive)</li>
+        <li>DVD/CD drive</li>
+        <li>Network boot device</li>
+    </ul>
+
+    <h3>Steps for Changing Boot Order</h3>
+    <ol>
+        <li>Restart the computer.</li>
+        <li>Enter BIOS/UEFI setup.</li>
+        <li>Open the Boot menu.</li>
+        <li>Select the preferred boot device.</li>
+        <li>Move the installation USB to the first position if needed.</li>
+        <li>Save changes and exit.</li>
+        <li>Restart the computer.</li>
+    </ol>
+</section>
+
+<!-- 7. WINDOWS INSTALLATION -->
+
+<section id="windows">
+    <h2>7. Windows Installation</h2>
+
+    <p>
+        Windows is an operating system developed by Microsoft.
+        It manages computer hardware, software, files, and applications.
+    </p>
+
+    <h3>Minimum Requirements for Windows 10</h3>
+    <ul>
+        <li>Processor: 1 GHz or faster.</li>
+        <li>RAM: 1 GB for 32-bit systems or 2 GB for 64-bit systems.</li>
+        <li>Storage: At least 32 GB for newer Windows 10 versions.</li>
+        <li>Graphics: DirectX 9-compatible graphics device with WDDM driver.</li>
+        <li>Display: 800 x 600 resolution or higher.</li>
+    </ul>
+
+    <p>
+        Note: Standard Windows 10 support ended on October 14, 2025.
+    </p>
+
+    <h3>Safety Precautions Before Installation</h3>
+    <ol>
+        <li>Back up important files.</li>
+        <li>Ensure a stable power supply.</li>
+        <li>Disconnect unnecessary external devices.</li>
+        <li>Check system compatibility.</li>
+        <li>Prepare a compatible bootable installation USB.</li>
+        <li>Verify that the installation media works properly.</li>
+        <li>Avoid interrupting the installation process.</li>
+    </ol>
+</section>
+
+<!-- 8. TROUBLESHOOTING -->
+
+<section id="problems">
+    <h2>8. Common Installation Problems</h2>
+
+    <table>
+        <tr>
+            <th>Problem</th>
+            <th>Possible Solution</th>
+        </tr>
+        <tr>
+            <td>USB not detected</td>
+            <td>Check the USB connection and boot order.</td>
+        </tr>
+        <tr>
+            <td>No boot device found</td>
+            <td>Verify the boot mode and bootable device.</td>
+        </tr>
+        <tr>
+            <td>Missing storage driver</td>
+            <td>Load the appropriate storage driver.</td>
+        </tr>
+        <tr>
+            <td>Installation freezes</td>
+            <td>Check the installation media and hardware.</td>
+        </tr>
+        <tr>
+            <td>Disk not detected</td>
+            <td>Check storage connections and controller settings.</td>
+        </tr>
+        <tr>
+            <td>Installation errors</td>
+            <td>Verify compatibility and installation files.</td>
+        </tr>
+    </table>
+</section>
+
+<!-- 9. INSTALLATION PROCEDURE -->
+
+<section id="procedure">
+    <h2>9. BIOS/UEFI and Operating System Installation Procedure</h2>
+
+    <ol>
+        <li>Check the computer hardware and compatibility.</li>
+        <li>Back up important data.</li>
+        <li>Prepare a bootable operating system USB.</li>
+        <li>Restart the computer and enter BIOS/UEFI.</li>
+        <li>Configure the correct boot mode and boot order.</li>
+        <li>Save necessary settings and restart.</li>
+        <li>Boot from the installation USB.</li>
+        <li>Follow the operating system setup instructions.</li>
+        <li>Select the correct installation drive and partition.</li>
+        <li>Complete the installation and initial configuration.</li>
+        <li>Install the required drivers and updates.</li>
+        <li>Verify that the operating system starts successfully.</li>
+    </ol>
+
+    <p>
+        Warning: Formatting or deleting the wrong partition
+        can erase important files. Always back up data first.
+    </p>
+</section>
+
+<!-- 10. CONCLUSION -->
+
+<section id="conclusion">
+    <h2>10. Conclusion</h2>
+
+    <p>
+        BIOS and UEFI are important firmware interfaces that
+        initialize hardware and start the operating system.
+        Understanding firmware settings, boot order, and
+        installation procedures helps technicians install
+        operating systems and troubleshoot common computer problems.
+    </p>
+</section>
+
+</main>
+
+<footer>
+    <p>BIOS, UEFI and Windows Installation</p>
+    <p>Computer Systems Servicing Project</p>
+</footer>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Server and Server Management</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #123c69;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        nav {
+            background-color: #205493;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 8px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: #ffd166;
+        }
+
+        main {
+            max-width: 950px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 22px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px #ccc;
+        }
+
+        h2 {
+            color: #123c69;
+            border-bottom: 2px solid #205493;
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            color: #205493;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #aaa;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #dbeafe;
+        }
+
+        footer {
+            background-color: #123c69;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Windows Server 2022</h1>
+    <p>Installation Procedures and Server Management</p>
+</header>
+
+<nav>
+    <a href="#introduction">Introduction</a>
+    <a href="#questions">Questions</a>
+    <a href="#windows">Windows Server</a>
+    <a href="#requirements">Requirements</a>
+    <a href="#management">Management</a>
+    <a href="#types">Types of Servers</a>
+    <a href="#administrator">Administrator</a>
+    <a href="#areas">Key Areas</a>
+    <a href="#installation">Installation</a>
+</nav>
+
+<main>
+
+    <!-- INTRODUCTION -->
+
+    <section id="introduction">
+        <h2>1. Introduction to Servers</h2>
+
+        <h3>What is a Server?</h3>
+        <p>
+            A server is a computer or software that provides
+            services, data, or resources to other computers
+            called clients through a network.
+        </p>
+
+        <h3>What is Windows Server 2022?</h3>
+        <p>
+            Windows Server 2022 is a server operating system
+            developed by Microsoft. It provides security,
+            networking, storage, and application services.
+        </p>
+
+        <h3>Why is a Server Operating System Important?</h3>
+        <ul>
+            <li>Manages users and computers.</li>
+            <li>Provides shared files and resources.</li>
+            <li>Improves network security.</li>
+            <li>Supports applications and services.</li>
+            <li>Helps administrators manage computers.</li>
+        </ul>
+    </section>
+
+    <!-- QUESTIONS -->
+
+    <section id="questions">
+        <h2>2. Guide Questions</h2>
+
+        <h3>1. What is a server?</h3>
+        <p>
+            A server is a computer or program that provides
+            services and resources to other computers on a network.
+        </p>
+
+        <h3>2. What is Windows Server 2022?</h3>
+        <p>
+            It is a Microsoft server operating system used to
+            manage networks, users, files, applications, and security.
+        </p>
+
+        <h3>3. Why is a server operating system important?</h3>
+        <p>
+            It is important because it manages network resources,
+            protects data, controls access, and provides reliable
+            services to users.
+        </p>
+
+        <h3>4. What preparations should be done before installing
+            an operating system?</h3>
+        <ul>
+            <li>Check hardware requirements.</li>
+            <li>Back up important files.</li>
+            <li>Prepare the installation media.</li>
+            <li>Check available storage space.</li>
+            <li>Prepare network settings.</li>
+            <li>Make sure you have a valid license.</li>
+        </ul>
+    </section>
+
+    <!-- WINDOWS SERVER -->
+
+    <section id="windows">
+        <h2>3. Windows Server 2022</h2>
+
+        <p>
+            Windows Server 2022 is an advanced server operating
+            system with multiple security features, hybrid cloud
+            capabilities, and a flexible application platform.
+            It includes security improvements to help protect
+            systems and data.
+        </p>
+
+        <h3>Editions of Windows Server 2022</h3>
+
+        <h3>Essentials</h3>
+        <p>
+            Designed for eligible small businesses with relatively
+            simple server needs. It has licensing and hardware
+            limitations.
+        </p>
+
+        <h3>Standard</h3>
+        <p>
+            Designed for physical or lightly virtualized
+            environments. It supports common server workloads.
+        </p>
+
+        <h3>Datacenter</h3>
+        <p>
+            Designed for highly virtualized data centers and
+            cloud environments. It supports extensive
+            virtualization capabilities.
+        </p>
+
+        <h3>Azure Edition</h3>
+        <p>
+            Designed for supported Microsoft Azure and
+            Azure Stack HCI environments, with specific
+            hybrid and cloud-related features.
+        </p>
+    </section>
+
+    <!-- MINIMUM REQUIREMENTS -->
+
+    <section id="requirements">
+        <h2>4. Minimum Requirements</h2>
+
+        <p>
+            The following are the basic minimum requirements
+            for Windows Server 2022. Actual requirements depend
+            on the installation option and workload.
+        </p>
+
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Minimum Requirement</th>
+            </tr>
+            <tr>
+                <td>Processor</td>
+                <td>1.4 GHz, 64-bit compatible processor</td>
+            </tr>
+            <tr>
+                <td>RAM</td>
+                <td>512 MB for Server Core; 2 GB for Desktop Experience</td>
+            </tr>
+            <tr>
+                <td>Storage</td>
+                <td>At least 32 GB disk space</td>
+            </tr>
+            <tr>
+                <td>Display</td>
+                <td>At least 1024 x 768 resolution when a display is needed</td>
+            </tr>
+            <tr>
+                <td>Network</td>
+                <td>Compatible Ethernet network adapter</td>
+            </tr>
+            <tr>
+                <td>Firmware</td>
+                <td>Compatible system firmware</td>
+            </tr>
+            <tr>
+                <td>Security</td>
+                <td>Security features depend on hardware and configuration</td>
+            </tr>
+        </table>
+
+        <p>
+            Note: The minimum specifications may not be sufficient
+            for a production server or a server running many services.
+        </p>
+    </section>
+
+    <!-- SERVER MANAGEMENT -->
+
+    <section id="management">
+        <h2>5. Server Management</h2>
+
+        <p>
+            Server management refers to the process of monitoring,
+            maintaining, configuring, securing, and optimizing
+            servers to ensure reliable and efficient operation.
+        </p>
+
+        <h3>Importance of Server Management</h3>
+        <ul>
+            <li>Ensures system availability.</li>
+            <li>Protects data and resources.</li>
+            <li>Improves server performance.</li>
+            <li>Helps prevent downtime.</li>
+            <li>Supports business continuity.</li>
+        </ul>
+    </section>
+
+    <!-- TYPES OF SERVERS -->
+
+    <section id="types">
+        <h2>6. Types of Servers and Their Functions</h2>
+
+        <h3>1. File Server</h3>
+        <p>
+            Stores and manages files that users can access
+            over a network.
+        </p>
+        <p><b>Example:</b> Shared folders in a school or office.</p>
+        <p><b>Function:</b> Centralized file storage and access control.</p>
+
+        <h3>2. Web Server</h3>
+        <p>
+            Hosts websites and delivers web pages through
+            HTTP or HTTPS requests.
+        </p>
+        <p><b>Example:</b> A school website.</p>
+        <p><b>Function:</b> Responds to browser requests.</p>
+
+        <h3>3. Database Server</h3>
+        <p>
+            Manages and stores structured data for applications.
+        </p>
+        <p><b>Example:</b> A student information system.</p>
+        <p><b>Function:</b> Organizes, retrieves, and updates data.</p>
+
+        <h3>4. Mail Server</h3>
+        <p>
+            Handles sending, receiving, and storing electronic mail.
+        </p>
+        <p><b>Example:</b> An organization's email system.</p>
+        <p><b>Function:</b> Manages email communication.</p>
+
+        <h3>5. Application Server</h3>
+        <p>
+            Runs applications and provides services to users
+            over a network.
+        </p>
+        <p><b>Example:</b> Business or school management software.</p>
+        <p><b>Function:</b> Executes application logic and services.</p>
+
+        <h3>6. Domain Controller</h3>
+        <p>
+            Manages user authentication and access in a Windows
+            domain using services such as Active Directory Domain Services.
+        </p>
+        <p><b>Example:</b> A school computer login system.</p>
+        <p><b>Function:</b> Controls domain accounts and permissions.</p>
+    </section>
+
+    <!-- ADMINISTRATOR -->
+
+    <section id="administrator">
+        <h2>7. Key Responsibilities of a Server Administrator</h2>
+
+        <ol>
+            <li>Installing and configuring servers.</li>
+            <li>Managing user accounts and permissions.</li>
+            <li>Monitoring server performance.</li>
+            <li>Implementing security measures.</li>
+            <li>Performing backups and recovery.</li>
+            <li>Updating software and operating systems.</li>
+            <li>Troubleshooting server issues.</li>
+        </ol>
+    </section>
+
+    <!-- KEY AREAS -->
+
+    <section id="areas">
+        <h2>8. Key Areas of Server Management</h2>
+
+        <h3>1. User Management</h3>
+        <p>
+            Controls user accounts, access rights, and permissions.
+        </p>
+
+        <h3>2. Security Management</h3>
+        <p>
+            Protects servers against threats and unauthorized access.
+        </p>
+
+        <h3>3. Backup Management</h3>
+        <p>
+            Creates backup copies of data to help restore
+            information after accidental loss or failure.
+        </p>
+
+        <h3>4. Performance Monitoring</h3>
+        <p>
+            Tracks CPU, RAM, disk, and network usage to identify
+            performance problems.
+        </p>
+
+        <h3>5. Maintenance</h3>
+        <p>
+            Installs updates, security patches, and other
+            necessary server software improvements.
+        </p>
+
+        <h3>6. Disaster Recovery</h3>
+        <p>
+            Restores data and services after a major system
+            failure or unexpected incident.
+        </p>
+    </section>
+
+    <!-- INSTALLATION PROCEDURES -->
+
+    <section id="installation">
+        <h2>9. Installation Procedures of Windows Server 2022</h2>
+
+        <ol>
+            <li>
+                <b>Prepare the computer.</b>
+                Check the hardware requirements and back up
+                important files.
+            </li>
+            <li>
+                <b>Prepare installation media.</b>
+                Obtain official Windows Server 2022 installation
+                media and create a bootable USB if needed.
+            </li>
+            <li>
+                <b>Boot from the installation media.</b>
+                Select the appropriate boot device in the
+                computer's firmware settings.
+            </li>
+            <li>
+                <b>Choose language and settings.</b>
+                Select the required language, time format,
+                and keyboard layout.
+            </li>
+            <li>
+                <b>Start installation.</b>
+                Select the option to install Windows Server.
+            </li>
+            <li>
+                <b>Select the edition.</b>
+                Choose the appropriate edition and installation
+                option for your requirements and license.
+            </li>
+            <li>
+                <b>Accept the license terms.</b>
+                Read and accept the applicable license terms.
+            </li>
+            <li>
+                <b>Select the installation drive.</b>
+                Choose the correct disk or partition.
+                Be careful because formatting can erase data.
+            </li>
+            <li>
+                <b>Install Windows Server.</b>
+                Wait for the installation to finish and
+                allow the computer to restart.
+            </li>
+            <li>
+                <b>Set the Administrator password.</b>
+                Create a strong password when prompted.
+            </li>
+            <li>
+                <b>Configure the server.</b>
+                Set the computer name, network settings,
+                date, and time.
+            </li>
+            <li>
+                <b>Update and secure the server.</b>
+                Install applicable updates and configure
+                appropriate security settings.
+            </li>
+            <li>
+                <b>Verify the installation.</b>
+                Check that the server starts correctly
+                and that the required services work.
+            </li>
+        </ol>
+    </section>
+
+    <!-- CONCLUSION -->
+
+    <section id="conclusion">
+        <h2>10. Conclusion</h2>
+
+        <p>
+            Windows Server 2022 helps manage users, files,
+            applications, networks, and security. Proper
+            installation and server management help maintain
+            system reliability, protect data, and improve
+            performance.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Windows Server 2022 and Server Management</p>
+    <p>HTML School Project</p>
+</footer>
+
+</body>
+</html>
+
